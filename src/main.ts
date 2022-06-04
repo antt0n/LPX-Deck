@@ -1,16 +1,27 @@
-import MidiService from "./Service/Midi/communication"
+process.env["NODE_CONFIG_DIR"] = __dirname + "/configs/";
+import Config from "config"
 import Options from "./config";
-import MidiQuery from "./Manager/midiQueryManager";
 import LayoutType from "./Models/Config/layoutEnum"
 import NoteHandler from './Handler/NoteHandler'
+import Driver from "./Drivers/driver";
+import availableDrivers from "./Drivers";
+import MidiService from "./Service/Midi/communication";
 
-class LXDeck {
-  private _midi: MidiService;
+class LaunchpadCore {
+  static readonly drivers = availableDrivers;
+
+  private static _devicesInstance: {[key: string]: MidiService};
+  readonly _instance: MidiService;
+  readonly _driver: Driver;
+
   private _options = Options;
 
-  constructor() {
+  constructor(driverName: string) {
     
-    this._midi = new MidiService(this._options.DeviceName);
+    if (!(driverName in LaunchpadCore.drivers)) throw new Error("LaunchpadCore: driver not found.")
+
+    this._driver = LaunchpadCore.drivers[driverName];
+    this._instance = new MidiService(this._driver.MidiIn, this._driver.MidiOut);
     
     this.onEnabled()
     
@@ -19,10 +30,11 @@ class LXDeck {
   }
 
   onEnabled() {
-    const options = this._options
-    const midi = this._midi
 
-    midi.out.send( Array<number>().concat(MidiQuery.setLayout(LayoutType.programmer), MidiQuery.textScrolling(37, "LX Deck")) );
+    const options = this._options
+    const midi = this._instance    
+    
+    midi.out.send( Array<number>().concat(this._driver.setLayout(LayoutType.programmer), this._driver.textScrolling(37, "LX Deck")) );
     // Set default layout
     for (const [key, value] of Object.entries(options.Layout)) {
       midi.out.noteOn(value.display, key, value.color)
@@ -39,10 +51,10 @@ class LXDeck {
   }
 
   onDisabled() {
-    this._midi.out.send( Array<number>().concat(MidiQuery.textScrolling(94, "Bye!"), MidiQuery.setLayout(LayoutType.note)) )
-    this._midi.closeAll();
+    const midi = this._instance
+    midi.out.send( Array<number>().concat(this._driver.textScrolling(94, "Bye!"), this._driver.setLayout(LayoutType.note)) )
+    midi.closeAll();
   }
 }
 
-const App = new LXDeck();
-
+const App = new LaunchpadCore("LaunchpadX");

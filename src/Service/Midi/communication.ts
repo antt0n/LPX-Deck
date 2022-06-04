@@ -8,19 +8,21 @@ export default class MidiService {
   public _midiInput: typeof this._port;
   public _midiOutput: typeof this._port;
 
-  private _deviceName: string;
-  
-  constructor(deviceName: string) {
+  private _midiIn: string;
+  private _midiOut: string;
 
-    this._deviceName = deviceName;
-    
-    this._midiInput = midi().openMidiIn(this._deviceName).or("Device not connected.")
-    this._midiOutput = midi().openMidiOut(this._deviceName).or("Device not connected.")
+  constructor(midiIn: string, midiOut: string) {
+
+    this._midiIn = midiIn;
+    this._midiOut = midiOut;
+
+    this._midiInput = midi().openMidiIn(midiIn).or("Device not connected.")
+    this._midiOutput = midi().openMidiOut(midiIn).or("Device not connected.")
     
   }
 
   private openOutput() {
-    this._midiOutput = midi().openMidiOut(this._deviceName).or("Device not connected.")
+    this._midiOutput = midi().openMidiOut(this._midiOut).or("Device not connected.")
   }
 
   private closeOutput() {
