@@ -6,6 +6,37 @@ import { TextEncoder } from 'util';
  */
 export default class Driver {
   /**
+   * Default constructor
+   */
+  constructor() {
+    this.DeviceName = 'default';
+    this.MidiIn = '';
+    this.MidiOut = '';
+    this.Dictionary = {
+      command: {
+        sysexHeader: [-1],
+        sysexFooter: -1, 
+        selectLayout: -1,
+        ledLightning: -1, 
+        textScrolling: -1,
+        ledBrightness: -1,
+        programmer: -1,
+        LightningCustomMode: {
+          static: -1,
+          flashing: -1,
+          pulsing: -1,
+        },
+        daw: -1,
+        dawClear: -1,
+        sessionColor: -1,
+        ledSleep: -1
+      },
+      input: {
+        onNote: 144,
+      }
+    }
+  } 
+  /**
    * Name of the device
    */
   public DeviceName!: string;
@@ -82,6 +113,10 @@ export default class Driver {
 
   private queryBuilder(data: Array<number>) {
     return Array<number>().concat(this.Dictionary.command.sysexHeader, data, [this.Dictionary.command.sysexFooter]);
+  }
+
+  private featureCheck(feat: any) {
+    return feat in this.Dictionary.command
   }
 
   /*
