@@ -45,7 +45,7 @@ export default class Driver {
       /**
        * Brightness level command
        */
-      brightness: number;
+      ledBrightness: number;
       /**
        * Programmer or Live mode command
        */
@@ -58,6 +58,22 @@ export default class Driver {
         flashing: number;
         pulsing: number;
       };
+      /**
+       * DAW Mode
+       */
+      daw: number;
+      /**
+       * Clear DAW
+       */
+      dawClear: number;
+      /**
+       * Session button color
+       */
+      sessionColor: number;
+      /**
+       * LED Sleep
+       */
+      ledSleep: number;
     };
     input: {
       onNote: number;
@@ -95,5 +111,61 @@ export default class Driver {
         Array.from(new TextEncoder().encode(text)),
       ),
     );
+  }
+
+  /**
+   * DriverQuery: feat: programmerToogle
+   * @param {boolean} bool Enable or disable programmer mode (switch from Live)
+   * @returns {Array<number>}
+   */
+  public programmerToggle(bool: boolean) {
+    return this.queryBuilder([this.Dictionary.command.programmer, +bool])
+  }
+
+  /**
+   * DriverQuery: feat: dawToogle
+   * @param {boolean} bool Enable or disable DAW mode (switch from Live)
+   * @returns {Array<number>}
+   */
+  public dawToogle(bool: boolean) {
+    return this.queryBuilder([this.Dictionary.command.daw, +bool])
+  }
+
+  /**
+   * DriverQuery: feat: dawClear
+   * @param {boolean} session Clear session layout (true by default)
+   * @param {boolean} drumrack Clear drumrack layout (true by default)
+   * @param {boolean} controlchange Clear controlchange layout (true by default)
+   * @returns {Array<number>}
+   */
+  public dawClear(session: boolean = true, drumrack: boolean = true, controlchange: boolean = true) {
+    return this.queryBuilder([this.Dictionary.command.dawClear, +session, +drumrack, +controlchange])
+  }
+
+  /**
+   * DriverQuery: feat: ledLightning
+   * @param {Array<number>} colors Array with colors to change (refer to Programmer Manual of your Launchpad)
+   * @returns {Array<number>}
+   */
+  public ledLightning(colors: Array<number>) {
+    return this.queryBuilder(Array<number>().concat([this.Dictionary.command.ledLightning], colors))
+  }
+
+  /**
+   * DriverQuery: feat: ledBrightness
+   * @param {number} brightness Brightness for the Launchpad (between 0 and 127)
+   * @returns {Array<number>}
+   */
+  public ledBrightness(brightness: number) {
+    return this.queryBuilder([this.Dictionary.command.ledBrightness, brightness])
+  }
+
+  /**
+   * DriverQuery: feat: ledBrightness
+   * @param {boolean} sleep Disable light of all pads (true by default)
+   * @returns {Array<number>}
+   */
+  public ledSleep(sleep: boolean = false) {
+    return this.queryBuilder([this.Dictionary.command.ledSleep, +!sleep])
   }
 }

@@ -17,13 +17,17 @@ export default class LaunchpadX extends Driver {
         selectLayout: 0,
         ledLightning: 3,
         textScrolling: 7,
-        brightness: 8,
+        ledBrightness: 8,
         programmer: 14,
         LightningCustomMode: {
           static: 1,
           flashing: 2,
           pulsing: 3,
         },
+        daw: 16,
+        dawClear: 18,
+        sessionColor: 20,
+        ledSleep: 9
       },
       input: {
         onNote: 144,
