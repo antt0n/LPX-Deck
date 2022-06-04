@@ -1,0 +1,21 @@
+{
+  "name": "lxdeck",
+  "version": "1.0.0",
+  "description": "Simple way to turn your Launchpad X into a fully customizable deck.",
+  "main": "main.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node src/main"
+  },
+  "author": "Antoine Seguin",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^17.0.39",
+    "ts-node": "^10.8.0",
+    "typescript": "^4.7.2"
+  },
+  "dependencies": {
+    "jzz": "^1.5.1",
+    "robotjs": "^0.6.0"
+  }
+}
