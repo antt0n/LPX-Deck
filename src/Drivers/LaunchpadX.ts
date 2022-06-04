@@ -1,15 +1,15 @@
-import Driver from "./driver";
+import Driver from './driver';
 
 /**
-  * Driver for Novation Launchpad X
-  */
-export default class LaunchpadX extends Driver  {
+ * Driver for Novation Launchpad X
+ */
+export default class LaunchpadX extends Driver {
   constructor() {
     super();
 
-    this.DeviceName = "Launchpad X"
-    this.MidiIn = "LPX MIDI"
-    this.MidiOut = "LPX MIDI"
+    this.DeviceName = 'Launchpad X';
+    this.MidiIn = 'LPX MIDI';
+    this.MidiOut = 'LPX MIDI';
     this.Dictionary = {
       command: {
         sysexHeader: [240, 0, 32, 41, 2, 12],
@@ -22,13 +22,12 @@ export default class LaunchpadX extends Driver  {
         LightningCustomMode: {
           static: 1,
           flashing: 2,
-          pulsing: 3
-        }
+          pulsing: 3,
+        },
       },
       input: {
-        onNote: 144
-      }
-    }
-    
+        onNote: 144,
+      },
+    };
   }
 }

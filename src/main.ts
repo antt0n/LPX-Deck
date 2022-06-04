@@ -1,60 +1,58 @@
-process.env["NODE_CONFIG_DIR"] = __dirname + "/configs/";
-import Config from "config"
-import Options from "./config";
-import LayoutType from "./Models/Config/layoutEnum"
-import NoteHandler from './Handler/NoteHandler'
-import Driver from "./Drivers/driver";
-import availableDrivers from "./Drivers";
-import MidiService from "./Service/Midi/communication";
+import Driver from './Drivers/driver';
+import availableDrivers from './Drivers';
+import MidiService from './Service/Midi';
 
 class LaunchpadCore {
   static readonly drivers = availableDrivers;
 
-  private static _devicesInstance: {[key: string]: MidiService};
+  private static _devicesInstance: { [key: string]: MidiService };
   readonly _instance: MidiService;
   readonly _driver: Driver;
 
-  private _options = Options;
+  private callbacks: { [e: string]: any[] } = {
+    onMidiIn: [],
+    onEnabled: [],
+    onDisabled: [],
+  };
 
   constructor(driverName: string) {
-    
-    if (!(driverName in LaunchpadCore.drivers)) throw new Error("LaunchpadCore: driver not found.")
+    if (!(driverName in LaunchpadCore.drivers)) throw new Error('LaunchpadCore: driver not found.');
 
     this._driver = LaunchpadCore.drivers[driverName];
     this._instance = new MidiService(this._driver.MidiIn, this._driver.MidiOut);
-    
-    this.onEnabled()
-    
-    process.on("SIGINT", () => this.onDisabled())
-    process.on("exit", () => this.onDisabled())
+
+    this.onEnabled();
+
+    process.on('SIGINT', () => this.onDisabled());
+    process.on('EXIT', () => this.onDisabled());
   }
 
-  onEnabled() {
-
-    const options = this._options
-    const midi = this._instance    
-    
-    midi.out.send( Array<number>().concat(this._driver.setLayout(LayoutType.programmer), this._driver.textScrolling(37, "LX Deck")) );
-    // Set default layout
-    for (const [key, value] of Object.entries(options.Layout)) {
-      midi.out.noteOn(value.display, key, value.color)
-    }
-    
-    // Midi IN
-    midi.in.connect((data: any) => { 
-      switch (data[0]) {
-        case options.Driver.input.onNote:
-          NoteHandler.OnNote(data, midi);
-      }
-      //console.log(data)
-    })
+  private async onEnabled() {
+    await this._instance.in.connect((data: any) => {
+      this.handleEvent('onMidiIn', data);
+    });
+    await this.handleEvent('onEnabled', this._instance, this._driver);
   }
 
-  onDisabled() {
-    const midi = this._instance
-    midi.out.send( Array<number>().concat(this._driver.textScrolling(94, "Bye!"), this._driver.setLayout(LayoutType.note)) )
-    midi.closeAll();
+  private async onDisabled() {
+    await this.handleEvent('onDisabled', this._instance, this._driver);
+    this._instance.closeAll();
+  }
+
+  /**
+   * Events
+   */
+  private async handleEvent(event: string, ...args: any[]) {
+    for (const f of this.callbacks[event]) f(...args);
+  }
+
+  on(event: 'onMidiIn', callback: (data: any) => void): void;
+  on(event: 'onEnabled', callback: (instance: MidiService, driver: Driver) => void): void;
+  on(event: 'onDisabled', callback: (instance: MidiService, driver: Driver) => void): void;
+
+  on(event: string, callback: any) {
+    if (!this.callbacks[event]) throw new Error(`Unknown event name: '${event}'`);
+    this.callbacks[event].push(callback);
   }
 }
-
-const App = new LaunchpadCore("LaunchpadX");
+export default LaunchpadCore;

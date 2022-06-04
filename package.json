@@ -1,24 +1,55 @@
 {
-  "name": "lxdeck",
-  "version": "1.0.0",
-  "description": "Simple way to turn your Launchpad X into a fully customizable deck.",
-  "main": "main.ts",
+  "name": "launchpadcore",
+  "version": "0.0.1",
+  "description": "Simple way to control your Novation Launchpad.",
+  "main": "./lib/main.js",
+  "types": "./lib/main.d.ts",
+  "files": [
+    "lib/**/*"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "ts-node src/main",
-    "build": "tsc"
+    "build": "tsc",
+    "compress": "uglifyjs-folder lib -o lib -e",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "eslint . --ext .ts",
+    "prepare" : "npm run build"
   },
-  "author": "Antoine Seguin",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antt0n/Launchpad-Core"
+  },
+  "engines": {
+    "node": "14.* || >=16.*"
+  },
+  "keywords": [
+    "novation",
+    "launchpad",
+    "launchpad x",
+    "nodejs",
+    "launchpad pro",
+    "launchpad mk2",
+    "launchpad mk3",
+    "launchpad mini",
+    "launchpad pro"
+  ],
+  "author": {
+    "name": "Antoine Seguin",
+    "email": "pro@antoine-seguin.fr",
+    "web": "https://antoine-seguin.fr"
+  },
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^17.0.39",
+    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "@typescript-eslint/parser": "^5.27.0",
+    "eslint": "^8.17.0",
+    "prettier": "^2.6.2",
     "ts-node": "^10.8.0",
-    "typescript": "^4.7.2"
+    "typescript": "^4.7.2",
+    "uglifyjs-folder": "^3.1.2"
   },
   "dependencies": {
-    "@types/config": "^0.0.41",
-    "config": "^3.3.7",
-    "jzz": "^1.5.1",
-    "robotjs": "^0.6.0"
+    "jzz": "^1.5.1"
   }
 }
