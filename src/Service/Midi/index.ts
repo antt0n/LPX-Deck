@@ -37,7 +37,7 @@ export default class MidiService {
     this._midiOutput.close();
   }
 
-  public get out() {
+  public get out(): any {
     this.openOutput();
     setTimeout(() => {
       this.closeOutput();
@@ -45,7 +45,7 @@ export default class MidiService {
     return this._midiOutput;
   }
 
-  public get in() {
+  public get in(): any {
     return this._midiInput;
   }
 
