@@ -20,6 +20,16 @@ Simple way to control your Novation Launchpad.
   yarn add launchpadcore
 ```
 
+## Supported devices
+Launchpad Core offers a driver system to adapt to the different existing models of Novation Launchpad.
+
+| Name        | Status                |
+| :---------- | :------------------------- |
+| Launchpad X | Available
+| Launchpad MK2 | Work in progress... |
+| Launchpad Pro MK3 | Work in progress... |
+| Launchpad Mini MK3 | Work in progress... |
+
 ## Usage/Examples
 
 Here is a typical example of what can be done with this module.

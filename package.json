@@ -1,6 +1,6 @@
 {
   "name": "launchpadcore",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Simple way to control your Novation Launchpad.",
   "main": "./lib/main.js",
   "types": "./lib/main.d.ts",
@@ -31,7 +31,9 @@
     "launchpad mk2",
     "launchpad mk3",
     "launchpad mini",
-    "launchpad pro"
+    "launchpad pro",
+    "launchpad core",
+    "core"
   ],
   "author": {
     "name": "Antoine Seguin",
