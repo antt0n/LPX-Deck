@@ -4,10 +4,10 @@ import MidiError from './midiError';
 
 export default class MidiService {
   // Cant import declaration
-  private _port = midi().openMidiOut();
+  private midi = midi().openMidiOut();
 
-  private _midiInput: typeof this._port;
-  private _midiOutput: typeof this._port;
+  private _midiInput = midi().openMidiOut();
+  private _midiOutput = midi().openMidiOut();
 
   private _midiIn: string;
   private _midiOut: string;
@@ -15,6 +15,8 @@ export default class MidiService {
   constructor(midiIn: string, midiOut: string) {
     this._midiIn = midiIn;
     this._midiOut = midiOut;
+
+    type _midiInput = keyof typeof this._port;
 
     this._midiInput = midi()
       .openMidiIn(midiIn)
