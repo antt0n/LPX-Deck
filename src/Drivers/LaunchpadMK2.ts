@@ -1,9 +1,8 @@
-import LayoutType from '../Models/layoutType';
 import { TextEncoder } from 'util';
 import Driver from './driver';
 
 /**
- * Driver for Novation Launchpad Mini MK3
+ * Driver for Novation Launchpad MK2
  */
 export default class LaunchpadMK2 extends Driver {
 
@@ -39,7 +38,7 @@ export default class LaunchpadMK2 extends Driver {
    * @param {number} layout Layout number
    * @returns {Array<number>}
    */
-   public setLayout(layout: LayoutType) {
+   public setLayout(layout: Type.layoutType) {
     return this.queryBuilder([this.Dictionary.commands.selectLayout, layout]);
   }
 
@@ -48,70 +47,24 @@ export default class LaunchpadMK2 extends Driver {
    * @param {number} color Index color
    * @param {string} text Text to display
    * @param {boolean} [shouldLoop=false] Show loop the message
-   * @param {number} [speed=7] Speed
    * @returns {Array<number>}
    */
-  public textScrolling(color: number, text: string, shouldLoop = false, speed = 7) {
+  public textScrolling(color: number, text: string, shouldLoop = false) {
     return this.queryBuilder(
-      [this.Dictionary.commands.textScrolling, +shouldLoop, speed, 0, color].concat(
+      [this.Dictionary.commands.textScrolling, color, +shouldLoop].concat(
         Array.from(new TextEncoder().encode(text)),
       ),
     );
   }
 
-  /**
-   * DriverQuery: feat: programmerToogle
-   * @param {boolean} bool Enable or disable programmer mode (switch from Live)
-   * @returns {Array<number>}
-   */
-  public programmerToggle(bool: boolean) {
-    return this.queryBuilder([this.Dictionary.commands.programmer, +bool])
-  }
+}
 
-  /**
-   * DriverQuery: feat: dawToogle
-   * @param {boolean} bool Enable or disable DAW mode (switch from Live)
-   * @returns {Array<number>}
-   */
-  public dawToogle(bool: boolean) {
-    return this.queryBuilder([this.Dictionary.commands.daw, +bool])
-  }
-
-  /**
-   * DriverQuery: feat: dawClear
-   * @param {boolean} session Clear session layout (true by default)
-   * @param {boolean} drumrack Clear drumrack layout (true by default)
-   * @param {boolean} controlchange Clear controlchange layout (true by default)
-   * @returns {Array<number>}
-   */
-  public dawClear(session: boolean = true, drumrack: boolean = true, controlchange: boolean = true) {
-    return this.queryBuilder([this.Dictionary.commands.dawClear, +session, +drumrack, +controlchange])
-  }
-
-  /**
-   * DriverQuery: feat: ledLightning
-   * @param {Array<number>} colors Array with colors to change (refer to Programmer Manual of your Launchpad)
-   * @returns {Array<number>}
-   */
-  public ledLightning(colors: Array<number>) {
-    return this.queryBuilder(Array<number>().concat([this.Dictionary.commands.ledLightning], colors))
-  }
-
-  /**
-   * DriverQuery: feat: ledBrightness
-   * @param {number} brightness Brightness for the Launchpad (between 0 and 127)
-   * @returns {Array<number>}
-   */
-  public ledBrightness(brightness: number) {
-    return this.queryBuilder([this.Dictionary.commands.ledBrightness, brightness])
-  }
-
-  /**
-   * DriverQuery: feat: ledBrightness
-   * @param {boolean} sleep Disable light of all pads (true by default)
-   * @returns {Array<number>}
-   */
-  public ledSleep(sleep: boolean = false) {
-    return this.queryBuilder([this.Dictionary.commands.ledSleep, +!sleep])
+module Type {
+  export enum layoutType {
+    session = 0,
+    user1 = 1,
+    user2 = 2,
+    fader = 4,
+    pan = 5
   }
 }
