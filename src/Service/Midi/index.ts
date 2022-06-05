@@ -1,4 +1,5 @@
 import midi from 'jzz';
+import * as jzz from 'jzz';
 import MidiError from './midiError';
 
 export default class MidiService {
@@ -47,6 +48,10 @@ export default class MidiService {
 
   public get in(): any {
     return this._midiInput;
+  }
+
+  public get midiQuery(): any {
+    return jzz.MIDI
   }
 
   public closeAll() {

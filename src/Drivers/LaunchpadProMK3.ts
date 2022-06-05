@@ -4,7 +4,7 @@ import Driver from './driver';
  * Driver for Novation Launchpad Pro MK3
  * 
  * WORK IN PROGRESS
- */
+ *//*
 export default class LaunchpadProMK3 extends Driver {
   constructor() {
     super();
@@ -37,3 +37,4 @@ export default class LaunchpadProMK3 extends Driver {
     };
   }
 }
+*/

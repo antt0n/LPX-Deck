@@ -28,7 +28,7 @@ Launchpad Core offers a driver system to adapt to the different existing models 
 | Launchpad X | Available
 | Launchpad MK2 | Work in progress... |
 | Launchpad Pro MK3 | Work in progress... |
-| Launchpad Mini MK3 | Work in progress... |
+| Launchpad Mini MK3 | Available |
 
 ## Usage/Examples
 
@@ -76,10 +76,10 @@ Usable on a Driver object.
 
 | Name        | Description                | Driver |
 | :---------- | :------------------------- | :------|
-| `setLayout()` | Set your LaunchPad layout | LaunchpadX
-| `textScrolling()` | Scroll a text along your launchpad pads | LaunchpadX
-| `programmerToggle()` | Toggle to programmer mode | LaunchpadX
-| `dawClear()` | Clear DAW layouts | LaunchpadX
-| `ledLightning()` | Set pads colors by SysEx | LaunchpadX
-| `ledBrightness()` | Set brightness of your launchpad | LaunchpadX
-| `ledSleep()` | Disable LED of your launchpad | LaunchpadX
+| `setLayout()` | Set your LaunchPad layout | LaunchpadX, Launchpad Mini MK3
+| `textScrolling()` | Scroll a text along your launchpad pads | LaunchpadX, Launchpad Mini MK3
+| `programmerToggle()` | Toggle to programmer mode | LaunchpadX, Launchpad Mini MK3
+| `dawClear()` | Clear DAW layouts | LaunchpadX, Launchpad Mini MK3
+| `ledLightning()` | Set pads colors by SysEx | LaunchpadX, Launchpad Mini MK3
+| `ledBrightness()` | Set brightness of your launchpad | LaunchpadX, Launchpad Mini MK3
+| `ledSleep()` | Disable LED of your launchpad | LaunchpadX, Launchpad Mini MK3

@@ -7,7 +7,7 @@ class LaunchpadCore {
 
   private static _devicesInstance: { [key: string]: MidiService };
   readonly _instance: MidiService;
-  readonly _driver: Driver;
+  readonly _driver: any;
 
   private callbacks: { [e: string]: any[] } = {
     onMidiIn: [],
@@ -47,8 +47,8 @@ class LaunchpadCore {
   }
 
   on(event: 'onMidiIn', callback: (data: any) => void): void;
-  on(event: 'onEnabled', callback: (instance: MidiService, driver: Driver) => void): void;
-  on(event: 'onDisabled', callback: (instance: MidiService, driver: Driver) => void): void;
+  on(event: 'onEnabled', callback: (instance: MidiService, driver: any) => void): void;
+  on(event: 'onDisabled', callback: (instance: MidiService, driver: any) => void): void;
 
   on(event: string, callback: any) {
     if (!this.callbacks[event]) throw new Error(`Unknown event name: '${event}'`);
@@ -56,3 +56,8 @@ class LaunchpadCore {
   }
 }
 export default LaunchpadCore;
+
+const App = new LaunchpadCore("LaunchpadX");
+App.on("onEnabled", (instance, driver) => {
+  instance.out.send(driver.textScrolling(65, "ENFIN"))
+})
