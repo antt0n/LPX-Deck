@@ -12,23 +12,16 @@ export default class LaunchpadMK2 extends Driver {
   }
   
   public DeviceName = "Launchpad MK2";
-  public MidiIn = "LPMiniMK3 MIDI";
-  public MidiOut = "LPMiniMK3 MIDI";
+  public MidiIn = "LPMK2 MIDI"; // Not tested
+  public MidiOut = "LPMK2 MIDI"; // Not tested
   public Dictionary = {
     sysEx: {
-      header: [240, 0, 32, 41, 2, 13],
+      header: [240, 0, 32, 41, 2, 24],
       footer: [247]
     },
     commands: {
-      selectLayout: 0,
-      ledLightning: 3,
-      textScrolling: 7,
-      ledBrightness: 8,
-      programmer: 14,
-      daw: 16,
-      dawClear: 18,
-      sessionColor: 20,
-      ledSleep: 9,
+      selectLayout: 34,
+      textScrolling: 20
     }
   }
   public LightningCustomMode!: {

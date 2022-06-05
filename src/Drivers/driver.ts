@@ -1,4 +1,3 @@
-import LayoutType from '../Models/layoutType';
 import { TextEncoder } from 'util';
 
 /**
