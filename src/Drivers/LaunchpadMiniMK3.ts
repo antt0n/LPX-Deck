@@ -1,4 +1,3 @@
-import LayoutType from '../Models/layoutType';
 import { TextEncoder } from 'util';
 import Driver from './driver';
 
@@ -46,7 +45,7 @@ export default class LaunchpadMiniMK3 extends Driver {
    * @param {number} layout Layout number
    * @returns {Array<number>}
    */
-   public setLayout(layout: LayoutType) {
+   public setLayout(layout: Type.layoutType) {
     return this.queryBuilder([this.Dictionary.commands.selectLayout, layout]);
   }
 
@@ -120,5 +119,16 @@ export default class LaunchpadMiniMK3 extends Driver {
    */
   public ledSleep(sleep: boolean = false) {
     return this.queryBuilder([this.Dictionary.commands.ledSleep, +!sleep])
+  }
+}
+
+module Type {
+  export enum layoutType {
+    session = 0,
+    custom1 = 4,
+    custom2 = 5,
+    custom3 = 6,
+    dawFader = 13,
+    programmer = 127
   }
 }

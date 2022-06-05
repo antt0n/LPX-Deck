@@ -20,7 +20,17 @@ export default class LaunchpadMK2 extends Driver {
     },
     commands: {
       selectLayout: 34,
-      textScrolling: 20
+      textScrolling: 20,
+      // Not implemented yet
+      setLed: 10,
+      setLedRgb: 11,
+      setLedCol: 12,
+      setLedRow: 13,
+      setAllLed: 14,
+      flashLed: 35,
+      pulseLed: 40,
+      // Should be added ?
+      faderSetup: 43
     }
   }
   public LightningCustomMode!: {
