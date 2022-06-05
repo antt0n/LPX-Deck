@@ -57,9 +57,9 @@ App.on("onDisabled", () => {
 ### Events
 | Name        | Description                |
 | :---------- | :------------------------- |
-| `onEnabled` | When enable (after connection) | 
-| `onDisabled` | When disable (exit the program) | 
-| `onMidiIn` | When new message received | 
+| `onConnected` | When connected to Launchpad | 
+| `onDisabled` | When disabled (exit the program) | 
+| `onMidiIn` | When new MIDI message received | 
 
 
 ### MIDI methods

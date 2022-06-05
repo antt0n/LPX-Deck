@@ -29,9 +29,6 @@ export default class LaunchpadX extends Driver {
       dawClear: 18,
       sessionColor: 20,
       ledSleep: 9,
-    },
-    input: {
-      onNote: 144,
     }
   }
   public LightningCustomMode!: {

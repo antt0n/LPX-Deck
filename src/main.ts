@@ -11,7 +11,7 @@ class LaunchpadCore {
 
   private callbacks: { [e: string]: any[] } = {
     onMidiIn: [],
-    onEnabled: [],
+    onConnected: [],
     onDisabled: [],
   };
 
@@ -31,7 +31,7 @@ class LaunchpadCore {
     await this._instance.in.connect((data: any) => {
       this.handleEvent('onMidiIn', data);
     });
-    await this.handleEvent('onEnabled', this._instance, this._driver);
+    await this.handleEvent('onConnected', this._instance, this._driver);
   }
 
   private async onDisabled() {
@@ -47,7 +47,7 @@ class LaunchpadCore {
   }
 
   on(event: 'onMidiIn', callback: (data: any) => void): void;
-  on(event: 'onEnabled', callback: (instance: MidiService, driver: any) => void): void;
+  on(event: 'onConnected', callback: (instance: MidiService, driver: any) => void): void;
   on(event: 'onDisabled', callback: (instance: MidiService, driver: any) => void): void;
 
   on(event: string, callback: any) {
@@ -58,6 +58,6 @@ class LaunchpadCore {
 export default LaunchpadCore;
 
 const App = new LaunchpadCore("LaunchpadX");
-App.on("onEnabled", (instance, driver) => {
+App.on("onConnected", (instance, driver) => {
   instance.out.send(driver.textScrolling(65, "ENFIN"))
 })
