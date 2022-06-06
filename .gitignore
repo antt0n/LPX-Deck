@@ -29,3 +29,5 @@ min
 *.njsproj
 *.sln
 *.sw?
+
+stats.html
