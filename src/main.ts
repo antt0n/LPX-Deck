@@ -55,9 +55,4 @@ class LaunchpadCore {
     this.callbacks[event].push(callback);
   }
 }
-export default LaunchpadCore;
-
-const App = new LaunchpadCore("LaunchpadX");
-App.on("onConnected", (instance, driver) => {
-  instance.out.send(driver.textScrolling(65, "ENFIN"))
-})
+export { LaunchpadCore };

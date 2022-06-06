@@ -30,7 +30,7 @@ class Driver {
        */
       footer: Array<number>;
     };
-    commands: { [key: string]: number }
+    commands: { [key: string]: number };
   };
 
   protected queryBuilder(data: Array<number>) {
@@ -38,8 +38,7 @@ class Driver {
   }
 
   protected featureCheck(feat: any) {
-    return feat in this.Dictionary.commands
+    return feat in this.Dictionary.commands;
   }
-
 }
 export default Driver;

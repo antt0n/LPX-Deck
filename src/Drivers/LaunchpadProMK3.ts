@@ -5,18 +5,17 @@ import Driver from './driver';
  * Driver for Novation Launchpad Pro MK3
  */
 export default class LaunchpadMK2 extends Driver {
-
   constructor() {
-    super()
+    super();
   }
-  
-  public DeviceName = "Launchpad Pro MK3";
-  public MidiIn = "LPProMK3 MIDI"; // Not tested
-  public MidiOut = "LPProMK3 MIDI"; // Not tested
+
+  public DeviceName = 'Launchpad Pro MK3';
+  public MidiIn = 'LPProMK3 MIDI'; // Not tested
+  public MidiOut = 'LPProMK3 MIDI'; // Not tested
   public Dictionary = {
     sysEx: {
       header: [240, 0, 32, 41, 2, 14],
-      footer: [247]
+      footer: [247],
     },
     commands: {
       selectLayout: 34,
@@ -30,15 +29,15 @@ export default class LaunchpadMK2 extends Driver {
       flashLed: 35,
       pulseLed: 40,
       // Should be added ?
-      faderSetup: 43
-    }
-  }
+      faderSetup: 43,
+    },
+  };
   public LightningCustomMode!: {
-    static: 1,
-    flashing: 2,
-    pulsing: 3,
-  }
-  
+    static: 1;
+    flashing: 2;
+    pulsing: 3;
+  };
+
   /*
    * Public methods
    */
@@ -48,7 +47,7 @@ export default class LaunchpadMK2 extends Driver {
    * @param {number} layout Layout number
    * @returns {Array<number>}
    */
-   public setLayout(layout: Type.layoutType) {
+  public setLayout(layout: Type.layoutType) {
     return this.queryBuilder([this.Dictionary.commands.selectLayout, layout]);
   }
 
@@ -61,12 +60,9 @@ export default class LaunchpadMK2 extends Driver {
    */
   public textScrolling(color: number, text: string, shouldLoop = false) {
     return this.queryBuilder(
-      [this.Dictionary.commands.textScrolling, color, +shouldLoop].concat(
-        Array.from(new TextEncoder().encode(text)),
-      ),
+      [this.Dictionary.commands.textScrolling, color, +shouldLoop].concat(Array.from(new TextEncoder().encode(text))),
     );
   }
-
 }
 
 module Type {
@@ -90,14 +86,13 @@ module Type {
     sequencerSwing = 16,
     programmer = 17,
     settingsMenu = 18,
-    customSettings = 19
+    customSettings = 19,
   }
 
   export const PizzaSize = {
     small: { value: 'small', key: 0, size: 25 },
     medium: { value: 'medium', key: 1, size: 35 },
     large: { value: 'large', key: 2, size: 50 },
-  } as const
-  export type PizzaSize = keyof typeof PizzaSize
-  }
+  } as const;
+  export type PizzaSize = keyof typeof PizzaSize;
 }

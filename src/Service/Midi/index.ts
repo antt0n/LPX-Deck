@@ -1,11 +1,14 @@
 import midi from 'jzz';
 import * as jzz from 'jzz';
-import MidiError from './midiError';
+
+class midiError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'MidiService';
+  }
+}
 
 export default class MidiService {
-  // Cant import declaration
-  private midi = midi().openMidiOut();
-
   private _midiInput = midi().openMidiOut();
   private _midiOutput = midi().openMidiOut();
 
@@ -16,8 +19,6 @@ export default class MidiService {
     this._midiIn = midiIn;
     this._midiOut = midiOut;
 
-    type _midiInput = keyof typeof this._port;
-
     this._midiInput = midi()
       .openMidiIn(midiIn)
       .or(() => this.midiError);
@@ -27,7 +28,7 @@ export default class MidiService {
   }
 
   private get midiError() {
-    throw new MidiError('Device not connected.');
+    throw new midiError('Device not connected.');
   }
 
   private openOutput() {
@@ -53,7 +54,7 @@ export default class MidiService {
   }
 
   public get midiQuery(): any {
-    return jzz.MIDI
+    return jzz.MIDI;
   }
 
   public closeAll() {

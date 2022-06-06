@@ -5,18 +5,17 @@ import Driver from './driver';
  * Driver for Novation Launchpad Mini MK3
  */
 export default class LaunchpadMiniMK3 extends Driver {
-
   constructor() {
-    super()
+    super();
   }
-  
-  public DeviceName = "Launchpad Mini MK3";
-  public MidiIn = "LPMiniMK3 MIDI";
-  public MidiOut = "LPMiniMK3 MIDI";
+
+  public DeviceName = 'Launchpad Mini MK3';
+  public MidiIn = 'LPMiniMK3 MIDI';
+  public MidiOut = 'LPMiniMK3 MIDI';
   public Dictionary = {
     sysEx: {
       header: [240, 0, 32, 41, 2, 13],
-      footer: [247]
+      footer: [247],
     },
     commands: {
       selectLayout: 0,
@@ -28,14 +27,14 @@ export default class LaunchpadMiniMK3 extends Driver {
       dawClear: 18,
       sessionColor: 20,
       ledSleep: 9,
-    }
-  }
+    },
+  };
   public LightningCustomMode!: {
-    static: 1,
-    flashing: 2,
-    pulsing: 3,
-  }
-  
+    static: 1;
+    flashing: 2;
+    pulsing: 3;
+  };
+
   /*
    * Public methods
    */
@@ -45,7 +44,7 @@ export default class LaunchpadMiniMK3 extends Driver {
    * @param {number} layout Layout number
    * @returns {Array<number>}
    */
-   public setLayout(layout: Type.layoutType) {
+  public setLayout(layout: Type.layoutType) {
     return this.queryBuilder([this.Dictionary.commands.selectLayout, layout]);
   }
 
@@ -71,7 +70,7 @@ export default class LaunchpadMiniMK3 extends Driver {
    * @returns {Array<number>}
    */
   public programmerToggle(bool: boolean) {
-    return this.queryBuilder([this.Dictionary.commands.programmer, +bool])
+    return this.queryBuilder([this.Dictionary.commands.programmer, +bool]);
   }
 
   /**
@@ -80,7 +79,7 @@ export default class LaunchpadMiniMK3 extends Driver {
    * @returns {Array<number>}
    */
   public dawToogle(bool: boolean) {
-    return this.queryBuilder([this.Dictionary.commands.daw, +bool])
+    return this.queryBuilder([this.Dictionary.commands.daw, +bool]);
   }
 
   /**
@@ -91,7 +90,7 @@ export default class LaunchpadMiniMK3 extends Driver {
    * @returns {Array<number>}
    */
   public dawClear(session: boolean = true, drumrack: boolean = true, controlchange: boolean = true) {
-    return this.queryBuilder([this.Dictionary.commands.dawClear, +session, +drumrack, +controlchange])
+    return this.queryBuilder([this.Dictionary.commands.dawClear, +session, +drumrack, +controlchange]);
   }
 
   /**
@@ -100,7 +99,7 @@ export default class LaunchpadMiniMK3 extends Driver {
    * @returns {Array<number>}
    */
   public ledLightning(colors: Array<number>) {
-    return this.queryBuilder(Array<number>().concat([this.Dictionary.commands.ledLightning], colors))
+    return this.queryBuilder(Array<number>().concat([this.Dictionary.commands.ledLightning], colors));
   }
 
   /**
@@ -109,7 +108,7 @@ export default class LaunchpadMiniMK3 extends Driver {
    * @returns {Array<number>}
    */
   public ledBrightness(brightness: number) {
-    return this.queryBuilder([this.Dictionary.commands.ledBrightness, brightness])
+    return this.queryBuilder([this.Dictionary.commands.ledBrightness, brightness]);
   }
 
   /**
@@ -118,7 +117,7 @@ export default class LaunchpadMiniMK3 extends Driver {
    * @returns {Array<number>}
    */
   public ledSleep(sleep: boolean = false) {
-    return this.queryBuilder([this.Dictionary.commands.ledSleep, +!sleep])
+    return this.queryBuilder([this.Dictionary.commands.ledSleep, +!sleep]);
   }
 }
 
@@ -129,6 +128,6 @@ module Type {
     custom2 = 5,
     custom3 = 6,
     dawFader = 13,
-    programmer = 127
+    programmer = 127,
   }
 }

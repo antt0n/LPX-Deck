@@ -5,18 +5,17 @@ import Driver from './driver';
  * Driver for Novation Launchpad MK2
  */
 export default class LaunchpadMK2 extends Driver {
-
   constructor() {
-    super()
+    super();
   }
-  
-  public DeviceName = "Launchpad MK2";
-  public MidiIn = "LPMK2 MIDI"; // Not tested
-  public MidiOut = "LPMK2 MIDI"; // Not tested
+
+  public DeviceName = 'Launchpad MK2';
+  public MidiIn = 'LPMK2 MIDI'; // Not tested
+  public MidiOut = 'LPMK2 MIDI'; // Not tested
   public Dictionary = {
     sysEx: {
       header: [240, 0, 32, 41, 2, 24],
-      footer: [247]
+      footer: [247],
     },
     commands: {
       selectLayout: 34,
@@ -30,15 +29,15 @@ export default class LaunchpadMK2 extends Driver {
       flashLed: 35,
       pulseLed: 40,
       // Should be added ?
-      faderSetup: 43
-    }
-  }
+      faderSetup: 43,
+    },
+  };
   public LightningCustomMode!: {
-    static: 1,
-    flashing: 2,
-    pulsing: 3,
-  }
-  
+    static: 1;
+    flashing: 2;
+    pulsing: 3;
+  };
+
   /*
    * Public methods
    */
@@ -48,7 +47,7 @@ export default class LaunchpadMK2 extends Driver {
    * @param {number} layout Layout number
    * @returns {Array<number>}
    */
-   public setLayout(layout: Type.layoutType) {
+  public setLayout(layout: Type.layoutType) {
     return this.queryBuilder([this.Dictionary.commands.selectLayout, layout]);
   }
 
@@ -61,12 +60,9 @@ export default class LaunchpadMK2 extends Driver {
    */
   public textScrolling(color: number, text: string, shouldLoop = false) {
     return this.queryBuilder(
-      [this.Dictionary.commands.textScrolling, color, +shouldLoop].concat(
-        Array.from(new TextEncoder().encode(text)),
-      ),
+      [this.Dictionary.commands.textScrolling, color, +shouldLoop].concat(Array.from(new TextEncoder().encode(text))),
     );
   }
-
 }
 
 module Type {
@@ -75,6 +71,6 @@ module Type {
     user1 = 1,
     user2 = 2,
     fader = 4,
-    pan = 5
+    pan = 5,
   }
 }

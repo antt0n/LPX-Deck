@@ -7,7 +7,7 @@ import LaunchpadMK2 from './LaunchpadMK2';
 const availableDrivers: { [key: string]: any } = {
   LaunchpadX: new LaunchpadX(),
   LaunchpadMiniMK3: new LaunchpadMiniMK3(),
-  LaunchpadMK2: new LaunchpadMK2()
+  LaunchpadMK2: new LaunchpadMK2(),
 };
 
 export default availableDrivers;
