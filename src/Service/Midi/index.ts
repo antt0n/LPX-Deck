@@ -1,5 +1,4 @@
 import midi from 'jzz';
-import * as jzz from 'jzz';
 
 class midiError extends Error {
   constructor(message: string) {
@@ -51,10 +50,6 @@ export default class MidiService {
 
   public get in(): any {
     return this._midiInput;
-  }
-
-  public get midiQuery(): any {
-    return jzz.MIDI;
   }
 
   public closeAll() {

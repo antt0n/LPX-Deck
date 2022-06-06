@@ -1,4 +1,3 @@
-import Driver from './Drivers/driver';
 import availableDrivers from './Drivers';
 import MidiService from './Service/Midi';
 
