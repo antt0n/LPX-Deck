@@ -53,5 +53,19 @@ class LaunchpadCore {
     if (!this.callbacks[event]) throw new Error(`Unknown event name: '${event}'`);
     this.callbacks[event].push(callback);
   }
+
+  /**
+   * Get instance of the Launchpad (MidiService)
+   */
+  public get instance(): MidiService {
+    return this._instance;
+  }
+
+  /**
+   * Get driver of the Launchpad
+   */
+  public get driver() {
+    return this._driver;
+  }
 }
 export { LaunchpadCore };
