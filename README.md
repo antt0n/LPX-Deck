@@ -35,7 +35,7 @@ Launchpad Core offers a driver system to adapt to the different existing models 
 Here is a typical example of what can be done with this module.
 
 ```javascript
-import LaunchpadCore from "launchpadcore"
+import { LaunchpadCore } from "launchpadcore"
 
 const App = new LaunchpadCore("LaunchpadX");
 

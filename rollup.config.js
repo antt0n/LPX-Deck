@@ -16,7 +16,7 @@ export default [
     input: 'src/main.ts',
     output: [
       {
-        entryFileNames: "launchpadcore-min-cjs.js",
+        entryFileNames: "launchpadcore-min.js",
         dir: 'lib',
         format: 'cjs',
         plugins: [
@@ -28,7 +28,9 @@ export default [
       del({
         targets: 'lib'
       }),
-      typescript(),
+      typescript({
+        module: 'esnext'
+      }),
       compiler(),
 
       // After build
@@ -39,7 +41,9 @@ export default [
             name: "Antoine Seguin",
             email: "pro@antoine-seguin.fr",
             web: "https://antoine-seguin.fr"
-          }
+          },
+          main: "launchpadcore-min.js",
+          types: "launchpadcore.d.ts",
         }
       }),
       cleanup({

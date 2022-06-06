@@ -1,9 +1,10 @@
 {
   "name": "launchpadcore",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "Simple way to control your Novation Launchpad.",
   "main": "./lib/launchpadcore-min.js",
   "types": "./lib/launchpadcore.d.ts",
+  "type": "commonjs",
   "scripts": {
     "dev": "ts-node src/main",
     "build": "rollup --config",
