@@ -6,7 +6,7 @@ class LaunchpadCore {
 
   private static _devicesInstance: { [key: string]: MidiService };
   readonly _instance: MidiService;
-  readonly _driver: any;
+  readonly _driver;
 
   private callbacks: { [e: string]: any[] } = {
     onMidiIn: [],
@@ -19,7 +19,7 @@ class LaunchpadCore {
 
     this._driver = LaunchpadCore.drivers[driverName];
     this._instance = new MidiService(this._driver.MidiIn, this._driver.MidiOut);
-
+  
     this.onEnabled();
 
     process.on('SIGINT', () => this.onDisabled());

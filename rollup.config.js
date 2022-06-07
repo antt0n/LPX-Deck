@@ -13,7 +13,7 @@ import copy from 'rollup-plugin-copy';
 
 export default [
   {
-    input: 'src/main.ts',
+    input: 'src/index.ts',
     output: [
       {
         entryFileNames: "launchpadcore-min.js",
@@ -34,27 +34,10 @@ export default [
       compiler(),
 
       // After build
-      generatePackageJson({
-        baseContents: {
-          name: "launchpadcore",
-          author: {
-            name: "Antoine Seguin",
-            email: "pro@antoine-seguin.fr",
-            web: "https://antoine-seguin.fr"
-          },
-          main: "launchpadcore-min.js",
-          types: "launchpadcore.d.ts",
-        }
-      }),
       cleanup({
         comments: "none"
       }),
       banner('<%= pkg.name %> v<%= pkg.version %> by <%= pkg.author.name %>'),
-      copy({
-        targets: [
-          { src: 'README.md', dest: 'lib' },
-        ]
-      }),
 
       // Visual & analytics 
       filesize({
@@ -68,7 +51,7 @@ export default [
     ] 
   },
   {
-    input: "lib/ts/main.d.ts",
+    input: "lib/ts/index.d.ts",
     output: [
       { 
         file: "lib/launchpadcore.d.ts", 

@@ -4,9 +4,12 @@
   "description": "Simple way to control your Novation Launchpad.",
   "main": "./lib/launchpadcore-min.js",
   "types": "./lib/launchpadcore.d.ts",
-  "type": "commonjs",
+  "files": [
+    "lib/**/*"
+  ],
   "scripts": {
-    "dev": "ts-node src/main",
+    "dev": "ts-node src/index",
+    "demo": "ts-node demo/index",
     "build": "rollup --config",
     "clean": "rd /s /q lib>nul 2>&1|echo.>nul",
     "format": "prettier --write \"src/**/*.ts\"",
@@ -28,7 +31,8 @@
     "launchpad mk3",
     "launchpad mini",
     "launchpad core",
-    "core"
+    "core",
+    "novation launchpad"
   ],
   "author": {
     "name": "Antoine Seguin",
