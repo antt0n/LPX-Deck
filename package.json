@@ -1,7 +1,7 @@
 {
   "name": "launchpadcore",
   "version": "0.2.0",
-  "description": "Simple way to control your Novation Launchpad.",
+  "description": "The easiest way to control your Novation Launchpad, for Node and web.",
   "main": "./lib/launchpadcore-min.js",
   "types": "./lib/launchpadcore.d.ts",
   "files": [
@@ -39,7 +39,7 @@
     "email": "pro@antoine-seguin.fr",
     "web": "https://antoine-seguin.fr"
   },
-  "license": "ISC",
+  "license": "BSD2",
   "devDependencies": {
     "@ampproject/rollup-plugin-closure-compiler": "^0.27.0",
     "@rollup/plugin-node-resolve": "^13.3.0",
