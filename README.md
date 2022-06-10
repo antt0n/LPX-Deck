@@ -1,34 +1,47 @@
 # Launchpad Core
 
-Simple way to control your Novation Launchpad.
+The easiest way to control your Novation Launchpad, for Node and web.
 
 ## Features
 
-- Driver system (for supporting all Launchpad - more compatibility in progress)
-- Advanced commands
+- Driver system ([see below](#supported-devices))
+- Advanced commands for each device
 - Light, powerful and flexible.
 
 *Note: Only tested with Launchpad X for now.*
 
 ## Installation
-
+For NPM:
 ```bash
-  // NPM
   npm install launchpadcore
-
-  // Yarn
+```
+For yarn:
+```bash
   yarn add launchpadcore
 ```
 
 ## Supported devices
 Launchpad Core offers a driver system to adapt to the different existing models of Novation Launchpad.
-
+### MK1
 | Name        | Status                |
 | :---------- | :------------------------- |
-| Launchpad X | Available
-| Launchpad MK2 | Partially available |
-| Launchpad Pro MK3 | Work in progress... |
-| Launchpad Mini MK3 | Available |
+| Launchpad | 🟪 Planned
+| Launchpad S | 🟪 Planned |
+| Launchpad Mini | ⬛ *Not planned yet* |
+
+### MK2
+| Name        | Status                |
+| :---------- | :------------------------- |
+| Launchpad | 🟩 Partially available |
+| Launchpad Pro | 🟧 Work in progress... |
+| Launchpad Mini | ⬛ *Not planned yet* |
+
+### MK3
+| Name        | Status                |
+| :---------- | :------------------------- |
+| Launchpad X | 🟩 Available
+| Launchpad Pro | 🟧 Work in progress... |
+| Launchpad Mini | 🟩 Available |
 
 ## Usage/Examples
 
@@ -41,6 +54,7 @@ const App = new LaunchpadCore("LaunchpadX");
 
 App.on("onEnabled", (instance, driver) => {
     instance.out.send(driver.textScrolling(15, "Welcome!"))
+    instance.out.noteOn(0, 11, 25) // Pad 11 to color 25
 })
 
 App.on("onMidiIn", (data) => {
