@@ -1,12 +1,10 @@
-import availableDrivers from './Drivers';
+import DriverManager, { Drivers, StringDrivers } from './Drivers';
 import MidiService from './Service/Midi';
 
 class LaunchpadCore {
-  static readonly drivers = availableDrivers;
-
   private static _devicesInstance: { [key: string]: MidiService };
-  readonly _instance: MidiService;
-  readonly _driver;
+  private readonly _instance: MidiService;
+  private readonly _driver: Drivers;
 
   private callbacks: { [e: string]: any[] } = {
     onMidiIn: [],
@@ -14,10 +12,8 @@ class LaunchpadCore {
     onDisabled: [],
   };
 
-  constructor(driverName: string) {
-    if (!(driverName in LaunchpadCore.drivers)) throw new Error('LaunchpadCore: driver not found.');
-
-    this._driver = LaunchpadCore.drivers[driverName];
+  constructor(driverName: StringDrivers) {
+    this._driver = DriverManager.getDriver(driverName);
     this._instance = new MidiService(this._driver.MidiIn, this._driver.MidiOut);
   
     this.onEnabled();
@@ -45,11 +41,11 @@ class LaunchpadCore {
     for (const f of this.callbacks[event]) f(...args);
   }
 
-  on(event: 'onMidiIn', callback: (data: any) => void): void;
-  on(event: 'onConnected', callback: (instance: MidiService, driver: any) => void): void;
-  on(event: 'onDisabled', callback: (instance: MidiService, driver: any) => void): void;
+  public on(event: 'onMidiIn', callback: (data: any) => void): void;
+  public on(event: 'onConnected', callback: (instance: MidiService, driver: any) => void): void;
+  public on(event: 'onDisabled', callback: (instance: MidiService, driver: any) => void): void;
 
-  on(event: string, callback: any) {
+  public on(event: string, callback: any) {
     if (!this.callbacks[event]) throw new Error(`Unknown event name: '${event}'`);
     this.callbacks[event].push(callback);
   }
@@ -64,7 +60,7 @@ class LaunchpadCore {
   /**
    * Get driver of the Launchpad
    */
-  public get driver() {
+  public get driver(): Drivers {
     return this._driver;
   }
 }

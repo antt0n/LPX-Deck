@@ -1,10 +1,10 @@
 import { TextEncoder } from 'util';
-import Driver from './driver';
+import Driver from '../driver';
 
 /**
  * Driver for Novation Launchpad Pro MK3
  */
-export default class LaunchpadMK2 extends Driver {
+export default class LaunchpadProMK3 extends Driver {
   constructor() {
     super();
   }

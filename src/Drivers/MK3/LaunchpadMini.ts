@@ -1,20 +1,20 @@
 import { TextEncoder } from 'util';
-import Driver from './driver';
+import Driver from '../driver';
 
 /**
- * Driver for Novation Launchpad X
+ * Driver for Novation Launchpad Mini MK3
  */
-export default class LaunchpadX extends Driver {
+export default class LaunchpadMiniMK3 extends Driver {
   constructor() {
     super();
   }
 
-  public DeviceName = 'Launchpad X';
-  public MidiIn = 'LPX MIDI';
-  public MidiOut = 'LPX MIDI';
+  public DeviceName = 'Launchpad Mini MK3';
+  public MidiIn = 'LPMiniMK3 MIDI';
+  public MidiOut = 'LPMiniMK3 MIDI';
   public Dictionary = {
     sysEx: {
-      header: [240, 0, 32, 41, 2, 12],
+      header: [240, 0, 32, 41, 2, 13],
       footer: [247],
     },
     commands: {
@@ -124,12 +124,10 @@ export default class LaunchpadX extends Driver {
 module Type {
   export enum layoutType {
     session = 0,
-    note = 1,
     custom1 = 4,
     custom2 = 5,
     custom3 = 6,
-    custom4 = 7,
-    dawFaders = 13,
+    dawFader = 13,
     programmer = 127,
   }
 }

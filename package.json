@@ -1,6 +1,6 @@
 {
   "name": "launchpadcore",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Simple way to control your Novation Launchpad.",
   "main": "./lib/launchpadcore-min.js",
   "types": "./lib/launchpadcore.d.ts",

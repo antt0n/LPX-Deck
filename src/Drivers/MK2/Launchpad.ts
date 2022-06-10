@@ -1,5 +1,5 @@
 import { TextEncoder } from 'util';
-import Driver from './driver';
+import Driver from '../driver';
 
 /**
  * Driver for Novation Launchpad MK2
